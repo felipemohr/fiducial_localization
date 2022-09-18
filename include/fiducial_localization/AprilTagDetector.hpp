@@ -7,6 +7,7 @@
 #include "std_msgs/msg/header.h"
 
 #include <opencv2/opencv.hpp>
+#include <apriltag/apriltag.h>
 #include <memory>
 
 
@@ -25,7 +26,12 @@ private:
 
   rclcpp::TimerBase::SharedPtr _image_timer;
 
+  cv::Mat _image_detections;
+  cv::Mat _image_detections_gray;
   cv_bridge::CvImagePtr _cv_image_prt;
+
+  apriltag_family_t *_tag_family;
+  apriltag_detector_t *_tag_detector;
 
 };
 

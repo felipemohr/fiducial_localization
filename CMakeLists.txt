@@ -18,13 +18,15 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(OpenCV 4.2.0 REQUIRED)
+find_package(apriltag REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
 add_executable(apriltag_detector src/AprilTagDetector.cpp)
-ament_target_dependencies(apriltag_detector OpenCV rclcpp std_msgs sensor_msgs cv_bridge)
+ament_target_dependencies(apriltag_detector OpenCV apriltag rclcpp std_msgs sensor_msgs cv_bridge)
+target_link_libraries(apriltag_detector ${OpenCV_LIBRARIES} apriltag)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
